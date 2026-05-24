@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { loginAdmin } from '../services/api';
 
 const AdminLogin = () => {
@@ -7,6 +8,7 @@ const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,11 +24,9 @@ const AdminLogin = () => {
     setIsLoading(true);
     try {
       const { data } = await loginAdmin(formData);
-      // Save token and admin info to localStorage
       localStorage.setItem('adminToken', data.data.token);
       localStorage.setItem('adminInfo', JSON.stringify(data.data));
-      // TODO: Redirect to dashboard in Phase 3
-      alert(`✅ Welcome, ${data.data.name}! Dashboard coming in Phase 3.`);
+      navigate('/admin/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
     } finally {
@@ -45,6 +45,20 @@ const AdminLogin = () => {
       <div className="grid-overlay" />
 
       <div className="login-center">
+        {/* Back to landing */}
+        <motion.button
+          onClick={() => navigate('/')}
+          className="back-btn"
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Back to Home
+        </motion.button>
+
         {/* Logo + Title */}
         <motion.div
           className="login-header"

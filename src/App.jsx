@@ -1,4 +1,5 @@
 import { MotionConfig, motion, useScroll, useSpring } from "framer-motion";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Benefits from "./components/Benefits.jsx";
 import CTA from "./components/CTA.jsx";
 import DashboardPreview from "./components/DashboardPreview.jsx";
@@ -7,8 +8,9 @@ import Footer from "./components/Footer.jsx";
 import Hero from "./components/Hero.jsx";
 import HowItWorks from "./components/HowItWorks.jsx";
 import Testimonials from "./components/Testimonials.jsx";
+import AdminLogin from "./pages/AdminLogin.jsx";
 
-export default function App() {
+function LandingPage() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, restDelta: 0.001 });
 
@@ -29,5 +31,16 @@ export default function App() {
         <Footer />
       </main>
     </MotionConfig>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/admin" element={<AdminLogin />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

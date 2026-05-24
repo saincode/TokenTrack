@@ -1,4 +1,5 @@
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, PlayCircle, Lock } from "lucide-react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import DashboardMockup from "./DashboardMockup.jsx";
 import Logo from "./Logo.jsx";
@@ -34,13 +35,22 @@ export default function Hero() {
               </motion.a>
             ))}
           </motion.nav>
-          <motion.a
-            href="#dashboard"
-            className="hidden rounded-full bg-royal px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-[#064ed8] sm:inline-flex"
-            {...buttonMotion}
-          >
-            View Dashboard
-          </motion.a>
+          <div className="hidden items-center gap-3 sm:flex">
+            <Link
+              to="/admin"
+              className="inline-flex items-center gap-1.5 rounded-full border border-royal/30 bg-white px-4 py-2.5 text-sm font-semibold text-royal shadow-soft transition hover:-translate-y-0.5 hover:border-royal hover:bg-royal/5"
+            >
+              <Lock size={14} />
+              Admin Login
+            </Link>
+            <motion.a
+              href="#dashboard"
+              className="rounded-full bg-royal px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-[#064ed8]"
+              {...buttonMotion}
+            >
+              View Dashboard
+            </motion.a>
+          </div>
         </motion.header>
 
         <div className="grid items-center gap-12 pt-16 lg:grid-cols-[0.92fr_1.08fr] lg:pt-24">

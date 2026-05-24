@@ -15,7 +15,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // React dev server
+  origin: /^http:\/\/localhost:\d+$/, // Allow any localhost port (dev)
   credentials: true,
 }));
 app.use(express.json()); // Parse incoming JSON bodies

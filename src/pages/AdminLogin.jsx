@@ -26,8 +26,7 @@ const AdminLogin = () => {
       const { data } = await loginAdmin(formData);
       localStorage.setItem('adminToken', data.data.token);
       localStorage.setItem('adminInfo', JSON.stringify(data.data));
-      // TODO: Redirect to dashboard in Phase 3
-      alert(`✅ Welcome, ${data.data.name}! Dashboard coming in Phase 3.`);
+      navigate('/admin/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
     } finally {
